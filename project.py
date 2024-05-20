@@ -143,3 +143,34 @@ if __name__ == "__main__":
         print("Unsupported input format")
         sys.exit(1)
 
+def save_xml(data, file_path):
+    try:
+        tree = ET.ElementTree(data)
+        tree.write(file_path)
+    except Exception as e:
+        print(f"Error saving XML file: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    input_file, output_file = parse_arguments()
+
+    if input_file.endswith('.json'):
+        data = load_json(input_file)
+    elif input_file.endswith('.yml') or input_file.endswith('.yaml'):
+        data = load_yaml(input_file)
+    elif input_file.endswith('.xml'):
+        data = load_xml(input_file)
+    else:
+        print("Unsupported input format")
+        sys.exit(1)
+
+    if output_file.endswith('.json'):
+        save_json(data, output_file)
+    elif output_file.endswith('.yml') or output_file.endswith('.yaml'):
+        save_yaml(data, output_file)
+    elif output_file.endswith('.xml'):
+        save_xml(data, output_file)
+    else:
+        print("Unsupported output format")
+        sys.exit(1)
+
