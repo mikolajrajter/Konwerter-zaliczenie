@@ -88,3 +88,31 @@ if __name__ == "__main__":
     else:
         print("Unsupported input format")
         sys.exit(1)
+
+def save_yaml(data, file_path):
+    try:
+        with open(file_path, 'w') as file:
+            yaml.dump(data, file)
+    except Exception as e:
+        print(f"Error saving YAML file: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    input_file, output_file = parse_arguments()
+
+    if input_file.endswith('.json'):
+        data = load_json(input_file)
+    elif input_file.endswith('.yml') or input_file.endswith('.yaml'):
+        data = load_yaml(input_file)
+    else:
+        print("Unsupported input format")
+        sys.exit(1)
+
+    if output_file.endswith('.json'):
+        save_json(data, output_file)
+    elif output_file.endswith('.yml') or output_file.endswith('.yaml'):
+        save_yaml(data, output_file)
+    else:
+        print("Unsupported output format")
+        sys.exit(1)
+
