@@ -242,3 +242,47 @@ if __name__ == '__main__':
     ex = ConverterApp()
     ex.show()
     sys.exit(app.exec_())
+
+import threading
+
+class ConverterApp(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('Data Converter')
+        layout = QVBoxLayout()
+
+        self.label = QLabel('Select input and output files')
+        layout.addWidget(self.label)
+
+        self.input_button = QPushButton('Select Input File')
+        self.input_button.clicked.connect(self.select_input_file)
+        layout.addWidget(self.input_button)
+
+        self.output_button = QPushButton('Select Output File')
+        self.output_button.clicked.connect(self.select_output_file)
+        layout.addWidget(self.output_button)
+
+        self.convert_button = QPushButton('Convert')
+        self.convert_button.clicked.connect(self.convert)
+        layout.addWidget(self.convert_button)
+
+        self.setLayout(layout)
+
+    def select_input_file(self):
+        self.input_file, _ = QFileDialog.getOpenFileName(self, 'Select Input File')
+        self.label.setText(f"Input File: {self.input_file}")
+
+    def select_output_file(self):
+        self.output_file, _ = QFileDialog.getSaveFileName(self, 'Select Output File')
+        self.label.setText(f"Output File: {self.output_file}")
+
+    def convert(self):
+        if hasattr(self, 'input_file') and hasattr(self, 'output_file'):
+            thread = threading.Thread(target=main, args=(self.input_file, self.output_file))
+            thread.start()
+        else:
+            self.label.setText('Please select both input and output files')
+
