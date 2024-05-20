@@ -116,3 +116,30 @@ if __name__ == "__main__":
         print("Unsupported output format")
         sys.exit(1)
 
+import xml.etree.ElementTree as ET
+
+def load_xml(file_path):
+    try:
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+        return root
+    except ET.ParseError as e:
+        print(f"Invalid XML format: {e}")
+        sys.exit(1)
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    input_file, output_file = parse_arguments()
+
+    if input_file.endswith('.json'):
+        data = load_json(input_file)
+    elif input_file.endswith('.yml') or input_file.endswith('.yaml'):
+        data = load_yaml(input_file)
+    elif input_file.endswith('.xml'):
+        data = load_xml(input_file)
+    else:
+        print("Unsupported input format")
+        sys.exit(1)
+
