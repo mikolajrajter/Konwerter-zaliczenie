@@ -1,0 +1,12 @@
+{
+    "imię": "Jan",
+    "nazwisko": "Adam",
+    "wiek": 50,
+    "zawód": "Mechanik",
+    "adres": {
+        "ulica": "Dolna 5",
+        "miasto": "Nysa",
+        "kod_pocztowy": "00-000"
+    },
+    "hobby": ["sport", "spacer", "gry"]
+}
