@@ -1,11 +1,11 @@
 {
     "imię": "Jan",
-    "nazwisko": "Kowalski",
-    "wiek": 30,
-    "zawód": "Inżynier",
+    "nazwisko": "Ignacy",
+    "wiek": 50,
+    "zawód": "Mechanik",
     "adres": {
-        "ulica": "Mickiewicza 5",
-        "miasto": "Warszawa",
+        "ulica": "Ogrodowa 5",
+        "miasto": "Nysa",
         "kod_pocztowy": "00-000"
     },
     "hobby": ["sport", "czytanie", "podróże"]
